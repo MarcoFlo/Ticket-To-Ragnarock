@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default colors -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Custom colors -->
+    <color name="bianco">#fff</color>
+    <color name="giuntoPartenza">#1dc3b1</color>
+    <color name="giuntoArrivo">#f26f4f</color>
+    <color name="hintColor">#bdbdbd</color>
+    <color name="marrone">#914e3f</color>
+    <color name="nero">#000</color>
+    <color name="popup">#ececec</color>
+    <color name="rosso">#f69176</color>
+    <color name="salmone">#f06d54</color>
+    <color name="sfondo">#f5f5ea</color>
+    <color name="trasparente">#00ffffff</color>
+    <color name="verde">#56b0a7</color>
+
+</resources>

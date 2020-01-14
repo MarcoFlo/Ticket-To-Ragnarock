@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/sfondo"
+    tools:context="com.example.giuseppegarone.tickettoragnarok.GameMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="425dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="88dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="187dp"
+            android:layout_marginTop="-45dp"
+            android:layout_marginStart="187dp"
+            android:gravity="center"
+            android:text="@string/credits_info"
+            android:textColor="@color/marrone"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="35dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/tutorial_button"
+                android:layout_width="185dp"
+                android:layout_height="match_parent"
+                android:background="@color/trasparente"
+                android:scaleType="centerInside"
+                android:src="@drawable/tutorial_btn" />
+
+            <ImageButton
+                android:id="@+id/play_game_button"
+                android:layout_width="185dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/trasparente"
+                android:scaleType="centerInside"
+                android:src="@drawable/play_btn" />
+
+            <ImageButton
+                android:id="@+id/top_players_button"
+                android:layout_width="185dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/trasparente"
+                android:scaleType="centerInside"
+                android:src="@drawable/topplayers_btn" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

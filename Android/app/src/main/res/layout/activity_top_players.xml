@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sfondo"
+    android:paddingBottom="10dp"
+    android:paddingLeft="80dp"
+    android:paddingRight="80dp"
+    android:paddingTop="10dp"
+    tools:context="com.example.giuseppegarone.tickettoragnarok.TopPlayersActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttonAddScore"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/classifica_titolo"
+        android:textAlignment="center"
+        android:textColor="@color/marrone"
+        android:textSize="32sp" />
+
+    <ListView
+        android:id="@+id/listViewScores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonBackHome"
+        android:layout_below="@+id/textView"
+        android:divider="@color/verde"
+        android:dividerHeight="2dp" />
+
+    <ImageButton
+        android:id="@+id/buttonBackHome"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/trasparente"
+        android:scaleType="centerInside"
+        android:src="@drawable/back_btn" />
+
+</RelativeLayout>

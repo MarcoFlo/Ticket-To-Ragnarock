@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <!-- Default items -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Custom items -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+
+    <!-- Popup theme -->
+    <style name="AppTheme.PopupTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+</resources>

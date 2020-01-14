@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">TicketToRagnarok</string>
+    <string name="round_totali">/3</string>
+    <string name="credits_info">An interactive game by\nMelissa C. Giuseppe G. Luca M. Marco F.</string>
+    <string name="server_info">Type server IP address and port</string>
+    <string name="classifica_titolo">Highscores</string>
+    <string name="iscrizione_titolo">You win!  :)</string>
+    <string name="sconfitta_titolo">You lose!  :(</string>
+    <string name="timer_label">TIMER: </string>
+    <string name="your_score_label">Your score: </string>
+    <string name="nickname_label">Nickname: </string>
+    <string name="enter_nickname_hint">Enter nickname</string>
+
+</resources>

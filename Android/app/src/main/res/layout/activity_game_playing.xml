@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sfondo"
+    tools:context="com.example.giuseppegarone.tickettoragnarok.GamePlayingActivity">
+
+    <!-- Sfondo -->
+    <ImageView
+        android:layout_width="420dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/display_game" />
+
+    <!-- Pulsanti SX -->
+    <ImageButton
+        android:id="@+id/movimento3_btn"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="100dp"
+        android:background="@color/trasparente"
+        android:scaleType="centerInside"
+        android:src="@drawable/outermove_btn" />
+
+    <ImageButton
+        android:id="@+id/movimento2_btn"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/trasparente"
+        android:scaleType="centerInside"
+        android:src="@drawable/innermove_btn" />
+
+    <!-- Pulsanti DX -->
+    <ImageButton
+        android:id="@+id/movimento1_btn"
+        android:layout_width="115dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="460dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="460dp"
+        android:background="@color/trasparente"
+        android:scaleType="centerInside"
+        android:src="@drawable/moveforward_btn" />
+
+    <ImageButton
+        android:id="@+id/change_color_btn"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="365dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="365dp"
+        android:background="@color/trasparente"
+        android:scaleType="centerInside"
+        android:src="@drawable/movebackward_btn" />
+
+</RelativeLayout>

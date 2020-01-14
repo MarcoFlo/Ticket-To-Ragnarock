@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "634163076701",
+    "firebase_url": "https://tickettoragnarock.firebaseio.com",
+    "project_id": "tickettoragnarock",
+    "storage_bucket": "tickettoragnarock.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634163076701:android:26733aa4f4f629be",
+        "android_client_info": {
+          "package_name": "com.example.giuseppegarone.tickettoragnarok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634163076701-9dthj2kje4n28udcmfhvgmsbse5vnc25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.giuseppegarone.tickettoragnarok",
+            "certificate_hash": "7a7a896e0befd704fad801fbec894137f458fc88"
+          }
+        },
+        {
+          "client_id": "634163076701-5ma1eecl840nvkjtsno9655c7dmt9up3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsQ7tMkwY9HNqGTBNxD69Mjx5PlqaXgwI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634163076701-5ma1eecl840nvkjtsno9655c7dmt9up3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
