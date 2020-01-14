@@ -23,10 +23,13 @@ int vertice_provenienza;
 Giunto giunto_provenienza;
 
 boolean start;
+boolean trovato = false;
+boolean vinto = false;
 
 HashMap<String, Giunto> map_giunti = new HashMap<String, Giunto>();
 HashMap<Integer, Integer> map_lati = new HashMap<Integer, Integer>(); //considerare la possibilità che si cerchi zero
 HashMap<Integer, Integer> map_corrispondenze = new HashMap<Integer, Integer>();
+HashMap<Integer, Integer> map_accesi = new HashMap<Integer, Integer>();
 
 void setup()
 {
@@ -145,6 +148,9 @@ void setup()
   ax1 = (int)random(0, 5); //da aggiungere 1 per avere A1,2,3,4,5
   ay1 = (int)random(0, 3); //da trasformare in A,B,C
 
+  bx1 = ((int)random(ax1+2, ax1+4))%5;
+  by1 = ((int)random(ay1+1, ay1+3))%3;
+
 
 
 
@@ -152,10 +158,11 @@ void setup()
   //println((char)(ay1+65)+str(ax1+1)); //nome del giunto da cercare in map_giunti...tipo A3
   vertice_provenienza = 10; //inizializzazione per non dare problemi
 
-  //giunto_provenienza = map_giunti.get((char)(ay1+65)+str(ax1+1));
+  giunto_provenienza = map_giunti.get((char)(ay1+65)+str(ax1+1));
 
-  giunto_provenienza = map_giunti.get("A1");
+  //giunto_provenienza = map_giunti.get("A1");
 
+  //scelgo random una delle possibili uscite dal giunto di partenza
   vertice_provenienza = 0;
   while (vertice_provenienza==0)
   {
@@ -168,7 +175,7 @@ void draw()
   //disegno ragnatela
   x = cos(angolo);
   y = sin(angolo);
-  if (xback!=-1)
+  if (xback!=-1) //serve perchè prima devo calcolare almeno una volta il seno/cos
   {
     fill(0);
     strokeWeight(0);
@@ -178,7 +185,42 @@ void draw()
 
     int direzione = 10;
 
-    //OPERAZIONI START
+    fill(30);
+    rect(800, 90, 50, 50);
+
+
+    if (mousePressed)
+    {
+      if (mouseX>800 && mouseX<850 && mouseY>90 && mouseY<140)
+      {
+
+        //metodo casuale per trovare arrivo e partenza
+        ax1 = (int)random(0, 5); //da aggiungere 1 per avere A1,2,3,4,5
+        ay1 = (int)random(0, 3); //da trasformare in A,B,C
+
+        bx1 = ((int)random(ax1+2, ax1+4))%5;
+        by1 = ((int)random(ay1+1, ay1+3))%3;
+        map_accesi.clear();
+        fill(240);
+        rect(0,0,880,880);
+        
+
+        giunto_provenienza = map_giunti.get((char)(ay1+65)+str(ax1+1));
+
+        //giunto_provenienza = map_giunti.get("A1");
+
+        //scelgo random una delle possibili uscite dal giunto di partenza
+        vertice_provenienza = 0;
+        while (vertice_provenienza==0)
+        {
+          vertice_provenienza = giunto_provenienza.getList().get((int)random(0, 4));
+        }
+
+        start = true;
+        vinto = false;
+      }
+    }
+    //OPERAZIONI START, start è quel momento in cui c'è la ragnatela disegnata e il primo tratto di start acceso
     if (start)
     {
 
@@ -198,20 +240,32 @@ void draw()
       strokeWeight(15);
       stroke(150, 30, 200);
       ellipse(giunto_provenienza.getX(), giunto_provenienza.getY(), dim_giunti, dim_giunti);
-      accendi(vertice_provenienza, map_lati.get(vertice_provenienza));
+
+      Giunto arrivo = map_giunti.get((char)(by1+65)+str(bx1+1));
+
+      strokeWeight(16);
+      stroke(150, 30, 200);
+      ellipse(arrivo.getX(), arrivo.getY(), dim_giunti, dim_giunti);
+
+
+      map_accesi.put(vertice_provenienza, map_lati.get(vertice_provenienza));
+      map_accesi.put(map_lati.get(vertice_provenienza), vertice_provenienza);
 
       if (map_corrispondenze.containsKey(vertice_provenienza)) //Per accendere i tiranti che sono doppi
       {
-        accendi(map_corrispondenze.get(vertice_provenienza), map_corrispondenze.get(map_lati.get(vertice_provenienza)));
-      }
 
+        map_accesi.put(map_corrispondenze.get(vertice_provenienza), map_corrispondenze.get(map_lati.get(vertice_provenienza)));
+        map_accesi.put(map_corrispondenze.get(map_lati.get(vertice_provenienza)), map_corrispondenze.get(vertice_provenienza));
+      }
+      accendi();
 
       if (mousePressed)//viene dato un imput dai tasti usciamo dallo stato start
       {
         vertice_provenienza = map_lati.get(vertice_provenienza); //aggiorno il valore del vertice di provenienza
         start = false;
       }
-    } else //se non siamo nello stato start
+    } 
+    else //se non siamo nello stato start
     {
 
       stroke(200, 100, 0);
@@ -227,9 +281,21 @@ void draw()
       ellipse(2*moltiplicatore*magnification*x+dx, -2*moltiplicatore*magnification*y+dy, dim_giunti, dim_giunti);
       ellipse(3*moltiplicatore*magnification*x+dx, -3*moltiplicatore*magnification*y+dy, dim_giunti, dim_giunti);
 
+      Giunto arrivo = map_giunti.get((char)(by1+65)+str(bx1+1));
+      Giunto partenza = map_giunti.get((char)(ay1+65)+str(ax1+1));
+      strokeWeight(16);
+      stroke(150, 30, 200);
+      ellipse(arrivo.getX(), arrivo.getY(), dim_giunti, dim_giunti);
+      ellipse(partenza.getX(), partenza.getY(), dim_giunti, dim_giunti);
 
-      if (mousePressed)
+      accendi();
+    if(mousePressed)
+    println("mouse");
+      if(!vinto)
+    println("!vinto");
+      if (mousePressed && !vinto)
       {
+        println("entro");
 
         direzione = getData(direzione);
 
@@ -239,16 +305,27 @@ void draw()
           Giunto giunto = (Giunto)it.next();
           if (giunto.check(vertice_provenienza, direzione)>0) //se clicco un tasto che porta a una direzione non accettabile non succede niente
           {
-            vertice_provenienza = giunto.check(vertice_provenienza, direzione);
+            vertice_provenienza = giunto.check(vertice_provenienza, direzione); //la funzione check ti restituisce il nuovo vertice di partenza
+            trovato = true;
           }
         }
-        vertice_provenienza = map_lati.get(vertice_provenienza); //aggiorno il valore del vertice di provenienza
-        delay(100);
-      }
-      accendi(vertice_provenienza, map_lati.get(vertice_provenienza));
-      if (map_corrispondenze.containsKey(vertice_provenienza)) //Per accendere i tiranti che sono doppi
-      {
-        accendi(map_corrispondenze.get(vertice_provenienza), map_corrispondenze.get(map_lati.get(vertice_provenienza)));
+        if (trovato)
+        {
+          if (!map_accesi.containsKey(vertice_provenienza) && !map_accesi.containsKey(map_lati.get(vertice_provenienza)))
+          {
+            vertice_provenienza = map_lati.get(vertice_provenienza); //aggiorno il valore del vertice di provenienza
+            map_accesi.put(vertice_provenienza, map_lati.get(vertice_provenienza));
+            map_accesi.put(map_lati.get(vertice_provenienza), vertice_provenienza);
+          }
+          if (map_corrispondenze.containsKey(vertice_provenienza) && !map_accesi.containsKey(map_corrispondenze.get(vertice_provenienza)) && !map_accesi.containsKey(map_corrispondenze.get(map_lati.get(vertice_provenienza)))) //Per accendere i tiranti che sono doppi
+          {
+            map_accesi.put(map_corrispondenze.get(vertice_provenienza), map_corrispondenze.get(map_lati.get(vertice_provenienza)));
+            map_accesi.put(map_corrispondenze.get(map_lati.get(vertice_provenienza)), map_corrispondenze.get(vertice_provenienza));
+          }
+
+          delay(200);
+        }
+        trovato = false;
       }
     }
   }
@@ -270,56 +347,78 @@ int getData(int precedente_direzione)
   //println("y " +mouseY);
   if (mouseX>10 && mouseX<60 && mouseY>90 && mouseY<140)
   {
-    println(-1 + " sinistra");
     return -1;
   } else if (mouseX>45 && mouseX<95 && mouseY>20 && mouseY<70)
   {
-    println(0 + " dritto");
     return 0;
   } else  if (mouseX>80 && mouseX<130 && mouseY>90 && mouseY<140)
   {
-    println(1+ " destra");
     return 1;
   } else
   {
     return precedente_direzione;
   }
 }
-void accendi(int da, int a)
+void accendi()
 {
+
   float xpart, ypart, xarr, yarr;
   xpart=0;
   ypart=0;
   xarr=0;
   yarr=0;
-  Iterator<Giunto> it = map_giunti.values().iterator();
-  int i=0;
-  while (it.hasNext())
+  int da = 0;
+  int a = 0;
+
+  Iterator<Integer> iter = map_accesi.keySet().iterator();
+  while (iter.hasNext())
   {
-    Giunto giunto = (Giunto)it.next();
-    if (giunto.getList().hasValue(da))
+    da = iter.next();
+    a = map_accesi.get(da);
+    xpart=0;
+    ypart=0;
+    xarr=0;
+    yarr=0;
+
+    Giunto arrivo = map_giunti.get((char)(by1+65)+str(bx1+1));
+    if (!arrivo.getList().hasValue(a))
     {
-      xpart = giunto.getX();
-      ypart = giunto.getY();
-      i++;
-    }
-    if (giunto.getList().hasValue(a))
+
+      Iterator<Giunto> iterator = map_giunti.values().iterator();
+      int j=0;
+      while (iterator.hasNext())
+      {
+        Giunto giunto = (Giunto)iterator.next();
+        if (giunto.getList().hasValue(da))
+        {
+          xpart = giunto.getX();
+          ypart = giunto.getY();
+          j++;
+        }
+        if (giunto.getList().hasValue(a))
+        {
+          xarr = giunto.getX();
+          yarr = giunto.getY();
+          j++;
+        }
+        if (j==2)
+        {
+          break;
+        }
+      }
+      stroke(255, 0, 0);
+      strokeWeight(7);
+      line(xpart, ypart, xarr, yarr);
+    } else
     {
-      xarr = giunto.getX();
-      yarr = giunto.getY();
-      i++;
-    }
-    if (i==2)
-    {
-      break;
+      textSize(42);
+      text("Vinto", 180, 90);
+      vinto = true;
     }
   }
-  stroke(255, 0, 0);
-  strokeWeight(7);
-  line(xpart, ypart, xarr, yarr);
 }
 
-void coordinate() //aggiunge le coordinate dei giunti
+void coordinate() //aggiunge le coordinate dei giunti utilizza lo stesso procedimento usato per disegnare la ragnatela, quindi se si cambiano i valori tipo magnification, moltiplicatore ecc sopra bisogna inizializzarli nello stesso modo qui
 {
   magnification = 60;
   moltiplicatore = 2;
@@ -332,7 +431,7 @@ void coordinate() //aggiunge le coordinate dei giunti
   String id="";
   for (float i=1; i<4; i+=0.2)
   {
-    id = (char)((int)i+64)+str(num);
+    id = (char)((int)i+64)+str(num); //mi permette di aggiungere le coordinate per A1,2,3,4,5, poi B e poi C
 
 
     x = cos(angolo);
@@ -341,7 +440,7 @@ void coordinate() //aggiunge le coordinate dei giunti
     Giunto supp = map_giunti.get(id);
     supp.addCoordinate(((int)i)*moltiplicatore*magnification*x+dx, -((int)i)*moltiplicatore*magnification*y+dy); //occhio che l'origine in processing è in alto a sinistra, quindi qui si sta lavorando nel terzo quadrante
 
-    angolo-=1.256;
+    angolo-=1.256; //  2*pi/5
     angolo = ((float)((int)(angolo*1000))/1000)%6.28;
 
     num++;
@@ -389,73 +488,34 @@ class Giunto
   int check(int vertice, int direzione)
   {
     int pos=-1;
-    println("new"+vertici.get(0));
+
     if (vertici.hasValue(vertice))
     {
-      if (vertici.get(0)!=0)
+      for (int i = 0; i<4; i++)
       {
-        for (int i = 0; i<4; i++)
+        if (vertici.get(i)==vertice)
         {
-          if (vertici.get(i)==vertice)
-          {
-            println("da eguagliare"+vertici.get(i));
-            pos=i;
-            println("vertice trovato alla pos: "+ pos);
-          }
-        }
-        if (direzione == 1)//destra
-        {
-          println("destra");
-          println("cacca"+vertici.get((pos+1)%4));
-          return vertici.get((pos+1)%4);
-        }
-        if (direzione == 0)//centro
-        {
-          println("centro");
-          println("cacca"+vertici.get((pos+2)%4));
-          return vertici.get((pos+2)%4);
-        }
-        if (direzione == -1)//sinistra
-        {
-          println("sinistra");
-          println("cacca"+vertici.get((pos+3)%4));
-          return vertici.get((pos+3)%4);
-        }
-      } 
-      else
-      {
-
-        for (int i = 0; i<4; i++)
-        {
-          if (vertici.get(i)==vertice)
-          {
-            println("da eguagliare"+vertici.get(i));
-            pos=i;
-            println("vertice trovato alla pos: "+ pos);
-          }
-        }
-        if (direzione == 1)//destra
-        {
-          println("destra");
-          println("cacca"+vertici.get(1));
-          return vertici.get((pos+1)%4);
-        }
-
-        if (direzione == -1)//sinistra
-        {
-          println("sinistra");
-          println("cacca"+vertici.get(2));
-          return vertici.get((pos+2)%4);
-        }
-        if (direzione == 0)//centro
-        {
-          println("centro");
-          println("cacca"+vertici.get(3));
-          return vertici.get((pos+3)%4);
+          pos=i;
         }
       }
-      return pos;
+      if (direzione == 1)//destra
+      {
+        println("destra");
+        return vertici.get((pos+1)%4);
+      }
+      if (direzione == 0)//centro
+      {
+        println("centro");
+        return vertici.get((pos+2)%4);
+      }
+      if (direzione == -1)//sinistra
+      {
+        println("sinistra");
+        return vertici.get((pos+3)%4);
+      }
     }
+
+
 
     return pos;
   }
