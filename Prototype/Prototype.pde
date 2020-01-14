@@ -202,8 +202,8 @@ void draw()
         by1 = ((int)random(ay1+1, ay1+3))%3;
         map_accesi.clear();
         fill(240);
-        rect(0,0,880,880);
-        
+        rect(0, 0, 880, 880);
+
 
         giunto_provenienza = map_giunti.get((char)(ay1+65)+str(ax1+1));
 
@@ -264,8 +264,7 @@ void draw()
         vertice_provenienza = map_lati.get(vertice_provenienza); //aggiorno il valore del vertice di provenienza
         start = false;
       }
-    } 
-    else //se non siamo nello stato start
+    } else //se non siamo nello stato start
     {
 
       stroke(200, 100, 0);
@@ -289,10 +288,10 @@ void draw()
       ellipse(partenza.getX(), partenza.getY(), dim_giunti, dim_giunti);
 
       accendi();
-    if(mousePressed)
-    println("mouse");
-      if(!vinto)
-    println("!vinto");
+      if (mousePressed)
+        println("mouse");
+      if (!vinto)
+        println("!vinto");
       if (mousePressed && !vinto)
       {
         println("entro");
@@ -408,7 +407,8 @@ void accendi()
       }
       stroke(255, 0, 0);
       strokeWeight(7);
-      line(xpart, ypart, xarr, yarr);
+      if (xpart!=0 && ypart!=0 && xarr!=0 && yarr!=0)
+        line(xpart, ypart, xarr, yarr);
     } else
     {
       textSize(42);
